@@ -1,0 +1,715 @@
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}
+html,body{height:100%}
+a, input, select, textarea {
+    outline: 0;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+}
+textarea:focus, keygen:focus, select:focus {
+    outline-offset: -2px;
+}
+$warp-width:100%;
+$warp-text:0.28rem;
+$textCl:#007aff;
+
+@mixin flex{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+@mixin flex-center{
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;  //垂直居中
+}
+@mixin flexOne{
+    -webkit-box-flex:1;-ms-flex:1;flex:1;
+}
+@mixin flex-content{
+/*老版本语法*/ -webkit-box-pack: center; -moz-box-pack: center; 
+/*混合版本语法*/ -ms-flex-pack: center; 
+/*新版本语法*/ -webkit-justify-content: center; justify-content: center;//水平居中
+}
+@mixin button{
+    border: 1px solid #007aff;
+    color: #007aff;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    border-radius: 5px;
+    line-height: 27px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background: none;
+    padding: 0 10px;
+    margin: 0;
+    height: 0.6rem;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+}
+@mixin after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: auto;
+    top: auto;
+    height: 0.02rem;
+    width: $warp-width;
+    background-color: #b5b5b5;
+    display: block;
+    z-index: 15;
+}
+body{
+    background: #eee;
+    width: $warp-width;
+}
+.top>.in,#app>.bottom,.blockItem .itemIn,.itemInner,.toolbarTop,.colorBlock>.row,.contenBlock>.row,.modalButtons,.actionsLabel,.popupOverlay,.rowBlock,.formList,.formListIcon,.formBtn{
+    @include flex;
+    @include flex-center;
+}
+.enrich,.modalButton,.formListInput{
+    @include flexOne;
+}
+.formListIcon,.formBtn{
+    @include flex-content;
+}
+#root{
+    width: $warp-width;
+    height: $warp-width; 
+    overflow: hidden;
+}
+#app{
+    height: $warp-width;
+    overflow: hidden;
+    position: relative;
+    font-size:$warp-text;
+    width: $warp-width;
+    -webkit-overflow-scrolling: touch;
+    .top{
+        height: 1rem;
+        line-height: 1rem;
+        position: absolute;
+        top: 0.4rem;
+        left: 0;
+        right: 0;
+        background: #fff;
+        box-sizing: border-box;
+        border-bottom: 0.01rem solid #ddd;
+        .in{
+            color: $textCl;
+            .back{
+                width: 1.5rem;
+                padding-left: 0.2rem;
+                color: #fff;
+                position: relative;
+                z-index: 9;
+            }
+            .right{
+                width: 1rem;
+            }
+        }
+        .topInfo{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 0 1rem;
+            font-size: 0.38rem;
+            color: #fff;
+            background: $textCl;
+        }
+
+    }
+    .warp{
+        height: 100%;
+        padding: 1.4rem 0 1rem 0;
+        box-sizing: border-box;
+        .listBlock{
+            .blockItem{
+                position: relative;
+                background: #fff;
+                a{
+                    display: block;
+                    &:active{
+                        background: #ddd;
+                    }                  
+                    }
+                    .itemIn{
+                        padding-left: 0.2rem;
+                        .icon{
+                            i{
+                                background: red;
+                                display: block;
+                            }
+                            .icon01{
+                                width: 0.6rem;
+                                height: 0.6rem;
+                                line-height: 0.6rem;
+                            }
+                            .icon02{
+                                width: 0.5rem;
+                                height: 0.5rem;
+                                background: url(../images/dg.png) no-repeat 0.05rem 0.05rem;
+                                background-size: $warp-width / 1.2 $warp-width / 1.2;
+                                border-radius: $warp-width / 2;
+                                background-color: #ddd;
+                            }
+                            .icon02.active{
+                                background-color: $textCl ;
+                            }
+                        }
+                     }                    
+                        .itemInner{
+                            margin-left: 0.2rem;
+                            border-bottom: 0.01rem solid #ddd;
+                            box-sizing: border-box;
+                            padding-right: 0.8rem;
+                            min-height: 0.9rem;
+                            .title{
+                                height: 0.8rem;
+                                line-height: 0.8rem;
+                            }
+                            .right{
+                            width: 0.8rem;
+                            height:  0.8rem;
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            transform: rotateZ(0deg);
+                            transition: transform 0.2s;
+                            }
+                            .right.active{
+                            transform: rotateZ(90deg);
+                            transition: transform 0.2s;
+                            }
+                            .right.go{
+                                background: url(../images/arrow001.png) 0 0 no-repeat;
+                                background-size: $warp-width;
+                                transform: rotateZ(0deg);
+                                transition: transform 0.2s;
+                            }
+                            .right.go.active{
+                                transform: rotateZ(90deg);
+                                transition: transform 0.2s;
+                            }
+                            .right.dxk{
+                                background: url(../images/dxk.png) 0 0 no-repeat;
+                                background-size: 0.4rem;
+                                background-position: calc(100% - 15px) center;
+                            }
+                            .choose{
+                                color: #bdbdbd;
+                            }
+                            .itemInput{
+                                width: $warp-width;
+                                height: 0.8rem;
+                                input{
+                                    display: block;
+                                    width: $warp-width;
+                                    height: $warp-width;
+                                    color: #000;
+                                }
+                            }
+                        }
+                        .itemInner.active{
+                            border-bottom: 0;
+                        }
+                        .itemInner.go{
+                            background: url(../images/arrow001.png) 0 0 no-repeat;
+                            background-size: 0.5rem 0.5rem;
+                            background-position: calc(100% - 15px) center;
+                        }
+                        .itemInner.right{
+                            background: url(../images/arrow001.png) 0 0 no-repeat;
+                            background-size: 0.5rem 0.5rem;
+                            background-position: calc(100% - 15px) center;
+                        }
+             
+                }
+            }
+        }
+    .bottom{
+        height: 1rem;
+        line-height: 1rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        color: $textCl;
+        font-size: 0.3rem;
+        box-sizing: border-box;
+        border-top:  0.01rem solid #ddd;
+        .left{
+            width: 1.5rem;
+            padding-left: 0.2rem;
+            text-align: left;
+        }
+        .right{
+            width: 1.5rem;
+            padding-right: 0.2rem;
+            text-align: right;
+        }
+    }
+    // 手风琴页面
+    .sfqList{
+        .contentBlock{
+            // height: 0;
+            width: $warp-width;
+            overflow: hidden;    
+            position: relative;
+            -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            // -webkit-transition: all 1s;
+            // transition: all 1s;
+            .blockItemContent{
+                margin-left: 0.2rem;
+                padding-right: 0.2rem;
+                font-size: 0.24rem;
+                line-height: 0.4rem;
+                border-bottom: 0.01rem solid #ddd;
+                p{
+                    margin: 0.2rem 0;
+                }
+            }
+        }
+        .contentBlock.active{
+            height: auto;
+            -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+            // -webkit-transition: all 1s;
+            // transition: all 1s;
+        }
+    }
+    // 复选框页面
+    .checkBox{
+        .labelCheck{
+            display: block;
+            input{
+                display: none;
+            }
+        }
+    }
+    .titleFx{
+        color: gray;
+        margin: 0.4rem 0.2rem;
+        p{
+            margin: 0.2rem 0;
+            font-size: 0.28rem;
+        }
+    }
+    //选择器页面
+    .toolbar{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: $warp-width;
+        height: 5.2rem;
+        background: #ddd;
+        border-top: 0.01rem solid #6d6d6d;
+        .toolbarTop{
+            height: 0.8rem;
+            background: #fff;
+            .right{
+                width: 1rem;
+                font-size: 0.34rem;
+                color: $textCl;
+            }
+        }
+        .toolbarInfo{
+            position: relative;
+            height: 4.4rem;
+            .centerLine{
+                height: 0.7rem;
+                box-sizing: border-box;
+                border-bottom: 0.01rem solid #a5a5a5;
+                border-top: 0.01rem solid #a5a5a5;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                right: 0;
+                transform: translateY( - $warp-width / 2);
+                opacity: 1;
+                z-index: 9;
+            }
+            .toolbarCon{
+                width: 2rem;
+                height: $warp-width;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-1rem,-0.3rem);
+                opacity: 0.6;
+                overflow-y: auto;
+                .toolbarConInner{
+                    height: auto;
+                    p{
+                        text-align: center;
+                        line-height: 0.7rem;
+                        font-size: 0.44rem;
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+    //彩色主题页面
+    .colorBlock{
+    margin: 0.7rem 0;
+    padding-left: 0.3rem;
+        .row{
+            width: $warp-width;
+            .colColor{
+                width: 20%;
+                height: 0.88rem;
+                margin-bottom: 0.2rem;
+                margin-right: 0.3rem;
+            }
+            .bgWhite{
+                background: #fff;
+            }
+            .bgBlack{
+                background: #000;
+            }
+            .bgBlue{
+                background: #007aff;
+            }
+            .bgOrange{
+                background: orange;
+            }
+            .bgRed{
+                background: red;
+            }
+            .bgGreen{
+                background: green;
+            }
+            .bgYellow{
+                background: yellow;
+            }
+            .bgGray{
+                background: gray;
+            }
+            .bgPink{
+                background: pink;
+            }
+            .bgLightblue{
+                background: lightblue;
+            }
+        }
+    }
+}
+
+    //弹窗
+    .contenBlock{
+        margin: 0.7rem 0;
+        padding: 0.3rem;
+        box-sizing: border-box;
+        .row{
+            width: $warp-width;
+            margin: 0.2rem 0;
+            -webkit-justify-content: space-between;
+            justify-content:space-between;
+            .col_33{
+                display: block;
+                width: calc((100% - 0.3rem*2) / 3);
+                height: auto;
+                text-align: center;
+                }
+            .col_50{
+                display: block;
+                width: calc((100% - 0.3rem) / 2);
+                height: auto;
+                text-align: center;
+                }
+            }
+        }    
+    .button {
+        @include button;
+    }
+    .popupOverlay{
+        width: $warp-width;
+        height: $warp-width;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        position: absolute;
+        background: rgba(0, 0, 0,0);
+        background: transparent; 
+        @include flex-content;
+        .modal{
+            opacity: 0;
+            z-index: -1;
+            transform:scale(1.1,1.1);         
+        }
+        .modal.active{
+            opacity: 1;
+            transition: opacity,transform,1s;
+            -webkit-animation: load 1s;
+            animation: load 1s;
+            z-index: 999;
+            transform:scale(1,1);
+        }
+        .modalIn{            
+            width: 5.4rem;
+            position: absolute;
+            z-index: 11000;
+            text-align: center;
+            border-radius: 0.14rem;
+            height: auto;
+            
+
+            .modalInner{
+                padding: 0.3rem;
+                border-radius: 0.14rem 0.14rem 0 0;
+                position: relative;
+                background: #e8e8e8;
+                    &:after{
+                        @include after;
+                    }
+                .modalTitle{
+                    font-weight: 500;
+                    font-size: 0.36rem;
+                    text-align: center;
+                }
+                .modalText{
+                    margin-top: 0.1rem;
+                    font-size: 0.28rem;
+                }
+                .inputField{
+                    .modalTextInput{
+                        box-sizing: border-box;
+                        height: 0.6rem;
+                        background: #fff;
+                        margin: 0;
+                        margin-top: 0.3rem;
+                        padding: 0 0.01rem;
+                        border: 1px solid #a0a0a0;
+                        border-radius: 0.1rem;
+                        width: $warp-width;
+                        font-size: 0.28rem;
+                        display: block;
+                        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+                        padding: 0 0.1rem;
+                    }
+                }
+            }
+            .modalButtons{
+                height: 0.88rem;
+                overflow: hidden;
+                border-radius: 0 0 0.14rem 0.14rem;
+                .modalButton{
+                    width: 100%;
+                    height: 0.88rem;
+                    font-size: 0.34rem;
+                    line-height: 0.88rem;
+                    text-align: center;
+                    color: #007aff;
+                    background: #e8e8e8;
+                    display: block;
+                    position: relative;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    padding: 0 0.1rem;
+                }
+            }
+        }
+        .modalInActions{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 11000;
+            width: 100%;
+            .actionsGroup{
+                margin: 0.16rem;
+                background: rgba(243, 243, 243, 0.95);
+                .actionsLabel
+                {
+                    font-size: 13px;
+                    line-height: 1.3;
+                    min-height: 44px;
+                    padding: 8px 10px;
+                    color: #8a8a8a;
+                    width: 100%;
+                    text-align: center;
+                    font-weight: normal;
+                    margin: 0;
+                    background: rgba(243, 243, 243, 0.95);
+                    box-sizing: border-box;
+                    display: block;
+                    position: relative;
+                }
+                .actionsButton{
+                    cursor: pointer;
+                    line-height: 43px;
+                    font-size: 20px;
+                    color: #007aff;
+                    width: 100%;
+                    text-align: center;
+                    font-weight: normal;
+                    margin: 0;
+                    background: rgba(243, 243, 243, 0.95);
+                    box-sizing: border-box;
+                    display: block;
+                    position: relative;
+                }
+                .actionsLabel{
+                    border-radius: 0.08rem 0.08rem 0 0;
+                    &:after{
+                        @include after;
+                    }
+                }                
+            }
+            .actionsGroup:first-child{
+                border-radius: 0.08rem;
+                .actionsButton:nth-child(2){
+                    &:after{
+                        @include after;
+                    }
+                }
+            }
+            .actionsGroup:first-child{
+                .actionsButton:last-child{
+                    border-radius: 0 0 0.08rem 0.08rem;
+                    color: red;
+                }
+            }
+            .actionsGroup:last-child{
+                border-radius: 0.08rem;
+                .actionsButton:last-child{
+                    border-radius: 0.08rem;
+                }
+            }
+        }
+    }
+    .popupOverlay.active{
+        background: rgba(0, 0, 0, 0.4); 
+        transition: transparent,0.6s;
+        z-index: 999;
+    }
+    // @-webkit-keyframes load{
+    //     0%{-webkit-transform: scale(1.1,1.1);transform: scale(1.1,1.1)}
+    //     100%{-webkit-transform: scale(1,1);transform: scale(1,1)}
+    // }
+
+.rowBlock{
+    width: $warp-width;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    box-sizing: border-box;
+    height: auto;
+    svg{
+        fill: blue;
+    }
+}
+.row_2{
+    width: $warp-width / 2;
+    height: 1.5rem;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    @include flex;
+    @include flex-center;
+    @include flex-content;
+    flex-direction: column;//垂直排列
+}
+.row_3{
+    width: $warp-width / 3;
+    height: 1.5rem;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    @include flex;
+    @include flex-center;
+    @include flex-content;
+    flex-direction: column;//垂直排列
+}
+.row_4{
+    width: $warp-width / 4;
+    height: 1.5rem;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    @include flex;
+    @include flex-center;
+    @include flex-content;
+    flex-direction: column;//垂直排列
+}
+.row_5{
+    width: $warp-width / 5;
+    height: 1.5rem;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    @include flex;
+    @include flex-center;
+    @include flex-content;
+    flex-direction: column;//垂直排列
+}
+.row_6{
+    width: $warp-width / 6;
+    height: 1.5rem;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    @include flex;
+    @include flex-center;
+    @include flex-content;
+    flex-direction: column;//垂直排列
+}
+.row_7{
+    width: $warp-width / 7;
+    height: 1.5rem;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    @include flex;
+    @include flex-center;
+    @include flex-content;
+    flex-direction: column;//垂直排列
+}
+.formList{
+    width: $warp-width;
+    background: #fff;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    .formListIcon{
+        width: 1rem;
+    }
+    .formListInput{
+        border-bottom: 1px solid #ddd;
+        input{
+            background: #fff;
+            width: $warp-width;
+        }
+    }
+}
+.formBtn{
+    width: $warp-width;
+    height: 0.8rem;
+    background: $textCl;
+    color: #fff;
+    border-radius: 0.08rem;
+    font-size: 0.34rem;
+}
